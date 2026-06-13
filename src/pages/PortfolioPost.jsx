@@ -4,6 +4,7 @@ import {
   ArrowLeft, Calendar, Clock, Tag, BookOpen,
   MessageSquare, Zap, Search, Target, CheckCircle2,
   Link2, Code, Copy, Check, ChevronLeft, ChevronRight,
+  Layers, Bot, ShieldCheck, Sparkles,
 } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
 import { portfolioPosts } from '../data/portfolioPosts'
@@ -17,6 +18,11 @@ const SECTION_META = {
   curiosity:  { icon: Search,         color: 'text-emerald-400' },
   approach:   { icon: Target,         color: 'text-rose-400' },
   outcome:    { icon: CheckCircle2,   color: 'text-teal-400' },
+  overview:   { icon: Sparkles,       color: 'text-violet-400' },
+  architecture:{ icon: Layers,        color: 'text-cyan-400' },
+  ai:         { icon: Bot,            color: 'text-emerald-400' },
+  rag:        { icon: Search,         color: 'text-amber-400' },
+  security:   { icon: ShieldCheck,    color: 'text-rose-400' },
 }
 
 function ProseContent({ text }) {
@@ -147,7 +153,9 @@ export default function PortfolioPost() {
         <header id="section-meta" className="mb-10">
           <div className="flex flex-wrap items-center gap-2 mb-4">
             <span className="px-3 py-1 rounded-full bg-gradient-to-r from-violet-600 to-cyan-600 text-white text-xs font-bold">
-              {t('portfolio.meta.session')} {post.sessionNumber}
+              {post.type === 'project'
+                ? t('portfolio.meta.caseProject')
+                : `${t('portfolio.meta.session')} ${post.sessionNumber}`}
             </span>
             <span className="text-sm text-[var(--text-muted)]">{post.module}</span>
           </div>

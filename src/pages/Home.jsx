@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { ArrowRight, BookOpen, Code2, Github, Linkedin, Mail } from 'lucide-react'
+import { ArrowRight, BookOpen, Code2, Github, Linkedin, Mail, Sparkles } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
 import { portfolioPosts } from '../data/portfolioPosts'
 import { projects } from '../data/projects'
@@ -113,6 +113,57 @@ function Hero() {
   )
 }
 
+// ─── Featured case project ──────────────────────────────────────────────────
+function CaseHighlight() {
+  const { t, localize } = useLanguage()
+  const navigate = useNavigate()
+  const post = portfolioPosts.find(p => p.slug === 'engestofte-gods-ai-case-project')
+
+  if (!post) return null
+
+  return (
+    <section className="max-w-6xl mx-auto px-6 pt-12">
+      <div
+        onClick={() => navigate(`/portfolio/${post.slug}`)}
+        className="card-hover cursor-pointer rounded-2xl border border-[var(--border)] bg-gradient-to-br from-violet-600/10 via-cyan-500/5 to-transparent p-8 sm:p-10 relative overflow-hidden group"
+      >
+        <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-gradient-to-br from-violet-600/20 to-cyan-500/20 blur-3xl" />
+
+        <div className="relative flex flex-col gap-4">
+          <div className="flex items-center gap-2">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-violet-600 to-cyan-600 text-white text-xs font-bold">
+              <Sparkles className="w-3.5 h-3.5" />
+              {t('home.newCaseLabel')}
+            </span>
+            <span className="text-xs text-[var(--text-muted)]">{post.module}</span>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-primary)] leading-tight group-hover:text-[var(--accent)] transition-colors">
+            {localize(post.title)}
+          </h2>
+
+          <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-3xl">
+            {localize(post.summary)}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5">
+            {post.tags.map(tag => (
+              <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full tag-default border">{tag}</span>
+            ))}
+          </div>
+
+          <div className="pt-2">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-white text-sm font-semibold group-hover:opacity-90 transition-opacity shadow-lg shadow-violet-500/20">
+              {t('home.viewCase')}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 // ─── Stats bar ───────────────────────────────────────────────────────────────
 function StatsBar() {
   const { t } = useLanguage()
@@ -166,6 +217,7 @@ export default function Home() {
   return (
     <div className="page-enter">
       <Hero />
+      <CaseHighlight />
       <StatsBar />
 
       {/* Recent posts */}

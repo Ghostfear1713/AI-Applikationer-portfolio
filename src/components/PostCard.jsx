@@ -20,7 +20,9 @@ export default function PostCard({ post, compact = false }) {
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
-            {t('portfolio.meta.session')} {post.sessionNumber}
+            {post.type === 'project'
+              ? t('portfolio.meta.caseProject')
+              : `${t('portfolio.meta.session')} ${post.sessionNumber}`}
           </span>
           <span className="text-xs text-[var(--text-muted)]">{post.module}</span>
         </div>

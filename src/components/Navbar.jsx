@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { Search, Sun, Moon, Globe, Menu, X, Zap } from 'lucide-react'
+import { Search, Sun, Moon, Globe, Menu, X, Zap, Sparkles } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useLanguage } from '../contexts/LanguageContext'
 
@@ -69,7 +69,14 @@ export default function Navbar({ onSearchClick }) {
           </nav>
 
           {/* Desktop controls */}
-          <div className="hidden md:flex items-center gap-1 shrink-0">
+          <div className="hidden md:flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => { navigate('/portfolio/engestofte-gods-ai-case-project'); setMobileOpen(false) }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-violet-600 to-cyan-600 text-white text-xs font-bold hover:opacity-90 transition-opacity shadow-md shadow-violet-500/20"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              {t('nav.caseLink')}
+            </button>
             <button
               onClick={onSearchClick}
               className="p-2 rounded-lg text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] transition-colors"
@@ -115,6 +122,13 @@ export default function Navbar({ onSearchClick }) {
         {mobileOpen && (
           <div className="md:hidden border-t border-[var(--border)] bg-[var(--bg-surface)]/98 backdrop-blur-md animate-fade-in">
             <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
+              <button
+                onClick={() => { navigate('/portfolio/engestofte-gods-ai-case-project'); setMobileOpen(false) }}
+                className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-gradient-to-r from-violet-600 to-cyan-600 text-white text-sm font-bold mb-1"
+              >
+                <Sparkles className="w-4 h-4" />
+                {t('nav.caseLink')}
+              </button>
               {NAV_LINKS.map(link => (
                 <NavLink
                   key={link.key}
